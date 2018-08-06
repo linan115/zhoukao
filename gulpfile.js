@@ -29,12 +29,12 @@ gulp.task('js', function() {
 })
 
 gulp.task('css', function() {
-        gulp.src('./src/css/*.css')
-            .pipe(minicss())
-            .pipe(gulp.dest('./src/css/'));
-    })
-    // gulp.task('watch', function() {
-    //     gulp.watch('./src/css/*.css')
-    // })
+    gulp.src('./src/css/*.css')
+        .pipe(minicss())
+        .pipe(gulp.dest('./src/css/'));
+})
+gulp.task('watch', function() {
+    gulp.watch('./src/css/*.css')
+})
 
-// gulp.task('default', ['server', 'js', 'css'])
+gulp.task('default', ['server', 'js', 'css', 'watch'])
