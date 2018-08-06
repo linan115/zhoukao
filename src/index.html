@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/swiper-4.3.3.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/flexible.js"></script>
+    <script src="js/swiper-4.3.3.min.js"></script>
+    <script src="js/better-scroll.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <header class="header">
+            有书头条
+        </header>
+        <section class="section container">
+            <div class="box">
+                <div class="title">
+                    讨论版
+                </div>
+                <div class="banner swiper-container">
+                    <ul class="swiper-wrapper">
+                        <li class="swiper-slide">
+                            <img src="images/pic_03.gif" alt="">
+                            <h1>论杂志封面的宠儿</h1>
+                        </li>
+                        <li class="swiper-slide">
+                            <img src="images/pic_03.gif" alt="">
+                            <h1>论杂志封面的宠儿</h1>
+                        </li>
+
+                        <li class="swiper-slide">
+                            <img src="images/pic_03.gif" alt="">
+                            <h1>论杂志封面的宠儿</h1>
+                        </li>
+                        <li class="swiper-slide">
+                            <img src="images/pic_03.gif" alt="">
+                            <h1>论杂志封面的宠儿</h1>
+                        </li>
+                    </ul>
+                </div>
+                <div class="title">
+                    有书头条
+                </div>
+                <div class="cont">
+
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        new Swiper('.banner');
+        new BScroll('.section');
+
+        function ajax(url, callback) {
+            var xml = new XMLHttpRequest();
+            xml.open('get', url, true);
+            xml.onload = function(res) {
+                if (res.target.status === 200 || res.target.status === 304) {
+                    callback && callback(res.target.response);
+                }
+            }
+            xml.send();
+        }
+        var cont = document.querySelector('.cont');
+        ajax('/api/ajax', function(data) {
+            var data = JSON.parse(data);
+            var html = '';
+            data.data.map(function(file) {
+                html += `
+                        <dl>
+                            <dd>
+                                <h1>${file.title}</h1>
+                                <p>${file.cont}</p>
+                            </dd>
+                            <dt>
+                                <img src="images/${file.img}" alt="">
+                            </dt>
+                        </dl>
+                    `
+            })
+            cont.innerHTML = html;
+
+        })
+    </script>
+</body>
+
+</html>
