@@ -8,7 +8,6 @@
 .header {
     width: 100%;
     height: px2rem(60px);
-    background: #ccc;
     @include display(flex, row, center, center);
     font-size: px2rem(20px);
 }
@@ -24,6 +23,7 @@
             height: px2rem(40px);
             @include display(flex, row, center, center);
             font-size: px2rem(20px);
+            background: #eee;
         }
         .banner {
             width: 100%;

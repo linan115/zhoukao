@@ -3,6 +3,8 @@ var server = require('gulp-webserver');
 var path = require('path');
 var fs = require('fs');
 var data = fs.readFileSync('./src/data/data.json');
+var uglify = require('gulp-uglify');
+var minicss = require('gulp-clean-css');
 gulp.task('server', function() {
     gulp.src('./src/')
         .pipe(server({
@@ -20,7 +22,19 @@ gulp.task('server', function() {
         }))
 })
 
-// gulp.task('watch', function() {
-//     gulp.watch('./src/css/*.css', ['server'])
-// })
-// gulp.task('default', ['server', 'watch']);
+gulp.task('js', function() {
+    gulp.src('./src/js/*.js')
+        .pipe(uglify())
+        .pipe(gulp.dest('./src/js/'));
+})
+
+gulp.task('css', function() {
+        gulp.src('./src/css/*.css')
+            .pipe(minicss())
+            .pipe(gulp.dest('./src/css/'));
+    })
+    // gulp.task('watch', function() {
+    //     gulp.watch('./src/css/*.css')
+    // })
+
+// gulp.task('default', ['server', 'js', 'css'])
